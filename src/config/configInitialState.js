@@ -27,6 +27,11 @@ export const initialStateConfigObject = {
       value: "",
       label: "PROJET CONCERNE (nom du projet)",
     },
+    NATURE: {
+      type: "text",
+      value: "",
+      label: "NATURE",
+    },
     "DESCRIPTION DETAILLEE (critères techniques principaux)": {
       type: "text",
       value: "",
