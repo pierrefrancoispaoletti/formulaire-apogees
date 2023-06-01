@@ -244,6 +244,7 @@ const Form = ({ labels, datas, state, setState, dest }) => {
                         state?.[label]?.[shortLabel]?.type === "number"
                           ? {
                               min: state?.[label]?.[shortLabel]?.min,
+                              step: state?.[label]?.[shortLabel]?.step,
                             }
                           : {}
                       }

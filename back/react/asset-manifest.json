@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/apogees/_ClientSpecific/React_Form_DE/react/static/css/main.abe081b8.css",
+    "main.js": "/apogees/_ClientSpecific/React_Form_DE/react/static/js/main.30aad924.js",
+    "static/media/logo.PNG": "/apogees/_ClientSpecific/React_Form_DE/react/static/media/logo.04a664e5ef7df8f99e15.PNG",
+    "index.html": "/apogees/_ClientSpecific/React_Form_DE/react/index.html",
+    "main.abe081b8.css.map": "/apogees/_ClientSpecific/React_Form_DE/react/static/css/main.abe081b8.css.map",
+    "main.30aad924.js.map": "/apogees/_ClientSpecific/React_Form_DE/react/static/js/main.30aad924.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.abe081b8.css",
+    "static/js/main.30aad924.js"
+  ]
+}

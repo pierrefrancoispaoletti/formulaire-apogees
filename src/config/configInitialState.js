@@ -50,7 +50,6 @@ export const initialStateConfigObject = {
     "DATE DU DEVIS SELECTIONNE": {
       type: "date",
       value: setDayDate(),
-      min: setDayDate(),
       label: "DATE DU DEVIS SELECTIONNE",
     },
     "Type de demande d'achat": {
@@ -64,6 +63,7 @@ export const initialStateConfigObject = {
       type: "number",
       value: "",
       min: 0,
+      step: 0.01,
       label: "Montant HT",
     },
     "Frais de port": {

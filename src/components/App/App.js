@@ -13,9 +13,6 @@ var dest = window.dest ?? "coll_2";
 
 function App() {
   const [state, setState] = useState({});
-  // var Res_Id = window.Res_id;
-  // var Coll_Id = window.Coll_Id;
-  // var datasFromBD = window.datasFromBd;
 
   // on recupere tous les labels pour generer les champs
   const labels = Array.from(getlabelList(indexCollectionFromServer));
@@ -41,13 +38,13 @@ function App() {
     return label;
   };
 
-  const setInitialValue = (initialState, formdatas, label, shortLabel, id) => {
-    initialState[label][shortLabel].value = {
-      id,
-      label: getValueFromId(id, formdatas, shortLabel),
-    };
-    return { ...initialState };
-  };
+  // const setInitialValue = (initialState, formdatas, label, shortLabel, id) => {
+  //   initialState[label][shortLabel].value = {
+  //     id,
+  //     label: getValueFromId(id, formdatas, shortLabel),
+  //   };
+  //   return { ...initialState };
+  // };
 
   useEffect(() => {
     if (!edit) {
