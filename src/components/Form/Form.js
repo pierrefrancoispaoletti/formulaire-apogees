@@ -73,16 +73,126 @@ const Form = ({ labels, datas, state, setState, dest }) => {
     e.preventDefault();
     axiosCall();
   };
+  // const handleChangeTextInput = useCallback(
+  //   (e, label) => {
+  //     const { value, name } = e.target;
+  //     if (
+  //       (name === "Montant HT" || name === "TVA") &&
+  //       state[label]?.TVA?.value !== "" &&
+  //       state[label]?.["Montant HT"]?.value !== ""
+  //     ) {
+  //       const value =
+  //         Number(state[label]?.TVA?.value) +
+  //         Number(state[label]?.["Montant HT"]?.value);
+
+  //       setState((prevState) => {
+  //         console.log(prevState[label]["Montant TTC"]);
+  //         return {
+  //           ...prevState,
+  //           [label]: {
+  //             ...prevState[label]["Montant TTC"],
+  //             value: value,
+  //           },
+  //         };
+  //       });
+  //     }
+  //     setState({
+  //       ...state,
+  //       [label]: {
+  //         ...state[label],
+  //         [name]: {
+  //           ...state[label][name],
+  //           value,
+  //         },
+  //       },
+  //     });
+  //   },
+  //   [setState, state]
+  // );
+  // const handleChangeTextInput = useCallback(
+  //   (e, label) => {
+  //     const { value, name } = e.target;
+  //     if (
+  //       (name === "Montant HT" || name === "TVA") &&
+  //       state[label]?.TVA?.value !== "" &&
+  //       state[label]?.["Montant HT"]?.value !== ""
+  //     ) {
+  //       const montantHT = Number(state[label]?.["Montant HT"]?.value);
+  //       const tva = Number(state[label]?.TVA?.value);
+  //       const montantTTC = montantHT + tva;
+
+  //       setState((prevState) => ({
+  //         ...prevState,
+  //         [label]: {
+  //           ...prevState[label],
+  //           "Montant TTC": {
+  //             ...prevState[label]["Montant TTC"],
+  //             value: montantTTC,
+  //           },
+  //           [name]: {
+  //             ...prevState[label][name],
+  //             value,
+  //           },
+  //         },
+  //       }));
+  //     } else {
+  //       setState((prevState) => ({
+  //         ...prevState,
+  //         [label]: {
+  //           ...prevState[label],
+  //           [name]: {
+  //             ...prevState[label][name],
+  //             value,
+  //           },
+  //         },
+  //       }));
+  //     }
+  //   },
+  //   [setState, state]
+  // );
+
   const handleChangeTextInput = useCallback(
     (e, label) => {
       const { value, name } = e.target;
-      setState({
+      const montantHTValue = state[label]?.["Montant HT"]?.value;
+      const tvaValue = state[label]?.TVA?.value;
+      let updatedState = { ...state };
+
+      updatedState = {
         ...state,
-        [label]: { ...state[label], [name]: { ...state[label][name], value } },
-      });
+        [label]: {
+          ...state[label],
+          [name]: {
+            ...state[label][name],
+            value,
+          },
+        },
+      };
+
+      // if (name === "Montant HT" || name === "TVA") {
+      //   if (tvaValue !== "" && montantHTValue !== "") {
+      //     const montantHT = Number(montantHTValue);
+      //     const tva = Number(tvaValue);
+      //     const montantTTC = montantHT + tva;
+
+      //     updatedState = {
+      //       ...updatedState,
+      //       [label]: {
+      //         ...updatedState[label],
+      //         "Montant TTC": {
+      //           ...updatedState[label]["Montant TTC"],
+      //           value: montantTTC.toFixed(2),
+      //         },
+      //       },
+      //     };
+      //   }
+      // }
+      setState({ ...updatedState });
     },
     [setState, state]
   );
+
+  console.log(state);
 
   const handleChangeSelectInput = useCallback(
     (e, label, newValue, ligne) => {
@@ -249,11 +359,23 @@ const Form = ({ labels, datas, state, setState, dest }) => {
                           : {}
                       }
                       value={
-                        shortLabel !== "Total Articles Prestations HT"
+                        shortLabel !== "Montant TTC"
                           ? state?.[label]?.[shortLabel]?.value
+                          : state?.[label]?.["Montant HT"]?.value !== "" &&
+                            state?.[label]?.["TVA"]?.value !== ""
+                          ? Number(
+                              Number(state?.[label]?.["Montant HT"]?.value) +
+                                Number(state?.[label]?.["TVA"]?.value)
+                            ).toFixed(2)
                           : ""
                       }
-                      onChange={(e) => handleChangeTextInput(e, label)}
+                      onChange={
+                        shortLabel !== "Montant TTC"
+                          ? (e) => handleChangeTextInput(e, label)
+                          : () => {
+                              console.log(shortLabel);
+                            }
+                      }
                     />
                   ) : (
                     <Container
@@ -271,7 +393,6 @@ const Form = ({ labels, datas, state, setState, dest }) => {
           </Stack>
         );
       })}
-
       {selectedFiles.length > 0 && (
         <>
           <Divider sx={{ margin: "15px" }} />

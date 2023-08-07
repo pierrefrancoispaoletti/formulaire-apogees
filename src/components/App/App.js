@@ -4,12 +4,13 @@ import { useEffect, useState } from "react";
 import { findPartsOfForm, getlabelList } from "../../utils/functions";
 import { initialStateConfigObject } from "../../config/configInitialState";
 import logo from "./logo.PNG";
+import logo2 from "./logo2.png";
 let edit = false;
 
 var userFromServer = window.user ?? user;
 var indexCollectionFromServer = window.indexCollection ?? indexCollection;
 
-var dest = window.dest ?? "coll_2";
+var dest = window.collId ?? "coll_19";
 
 function App() {
   const [state, setState] = useState({});
@@ -38,14 +39,6 @@ function App() {
     return label;
   };
 
-  // const setInitialValue = (initialState, formdatas, label, shortLabel, id) => {
-  //   initialState[label][shortLabel].value = {
-  //     id,
-  //     label: getValueFromId(id, formdatas, shortLabel),
-  //   };
-  //   return { ...initialState };
-  // };
-
   useEffect(() => {
     if (!edit) {
       let initialState = { ...initialStateConfigObject };
@@ -68,7 +61,7 @@ function App() {
           marginBottom: "12px",
         }}
       >
-        <img width="30%" src={logo} alt="logo Apogées" />
+        <img width="30%" src={dest !== "coll_19" ? logo : logo2} alt="logo" />
       </div>
       <header className="App-header">
         <h1 className="App-title">Demande d'engagement de dépenses</h1>
